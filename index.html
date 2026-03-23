@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atelier Wen — Weekly Sales Automation Audit</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --muted: #9ca3af;
+    --accent: #6366f1;
+    --green: #22c55e;
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --blue: #3b82f6;
+    --cyan: #06b6d4;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height:1.6; padding: 24px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+  .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  .timestamp { color: var(--accent); font-weight: 500; }
+  h2 { font-size: 20px; font-weight: 600; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; font-weight: 600; margin: 16px 0 8px; color: var(--cyan); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .card-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
+  .card-value { font-size: 32px; font-weight: 700; }
+  .card-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .green { color: var(--green); }
+  .red { color: var(--red); }
+  .amber { color: var(--amber); }
+  .blue { color: var(--blue); }
+  .cyan { color: var(--cyan); }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 24px; background: var(--card); border-radius: 12px; overflow: hidden; }
+  th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+  th { background: rgba(99,102,241,0.1); color: var(--accent); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+  .badge-green { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-amber { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .badge-blue { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .badge-gray { background: rgba(156,163,175,0.15); color: var(--muted); }
+  .alert { padding: 16px 20px; border-radius: 12px; margin: 12px 0; font-size: 14px; }
+  .alert-red { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
+  .alert-amber { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); }
+  .alert-green { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
+  .section-icon { margin-right: 8px; }
+  .pipeline-bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 8px 0; }
+  .pipeline-bar > div { height: 100%; }
+  .footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Atelier Wen — Weekly Sales Automation Audit</h1>
+<p class="subtitle">Audit Period: <span class="timestamp">March 16 – 23, 2026</span> &nbsp;|&nbsp; Generated: <span class="timestamp">March 23, 2026</span></p>
+
+<!-- KPI Cards -->
+<div class="grid">
+  <div class="card">
+    <div class="card-title">Total Pipeline Deals</div>
+    <div class="card-value">388</div>
+    <div class="card-sub">Inflection 365 · Ancestra 7 · Xuan 16</div>
+  </div>
+  <div class="card">
+    <div class="card-title">New Deals This Week</div>
+    <div class="card-value green">26</div>
+    <div class="card-sub">Inflection 3 · Ancestra 7 · Xuan 16</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Shopify Orders This Week</div>
+    <div class="card-value blue">5</div>
+    <div class="card-sub">Xuan 4 · Ancestra 1 · Inflection 0</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Shopify Revenue (HKD)</div>
+    <div class="card-value cyan">$157,692</div>
+    <div class="card-sub">Xuan $111,956 · Ancestra $45,736</div>
+  </div>
+</div>
+
+<!-- Section 1: Pipeline Overview -->
+<h2><span class="section-icon">📊</span>Pipeline Overview</h2>
+
+<h3>Inflection Sales Pipeline (365 deals)</h3>
+<table>
+  <tr><th>Stage</th><th>Count</th><th>% of Active</th></tr>
+  <tr><td>Won Deals</td><td><span class="green">33</span></td><td>32.7%</td></tr>
+  <tr><td>Invited To Interview</td><td>24</td><td>23.8%</td></tr>
+  <tr><td>Submitted Initial Application</td><td>18</td><td>17.8%</td></tr>
+  <tr><td>Interview Scheduled</td><td>7</td><td>6.9%</td></tr>
+  <tr><td>Allocation(s) Offered</td><td>7</td><td>6.9%</td></tr>
+  <tr><td>Submitted Full Application</td><td>6</td><td>5.9%</td></tr>
+  <tr><td>Interview Completed</td><td>3</td><td>3.0%</td></tr>
+  <tr><td>Closing - Invoice Sent</td><td>3</td><td>3.0%</td></tr>
+  <tr><td>Lost Deals</td><td><span class="red">264</span></td><td>—</td></tr>
+</table>
+
+<h3>Ancestra Jiao Sales (7 deals — all new this week)</h3>
+<table>
+  <tr><th>Stage</th><th>Count</th></tr>
+  <tr><td>Submitted Interest</td><td>6</td></tr>
+  <tr><td>Contacted - No Reply</td><td>1</td></tr>
+</table>
+
+<h3>Perception Xuan Sales (16 deals — all new this week)</h3>
+<table>
+  <tr><th>Stage</th><th>Count</th></tr>
+  <tr><td>Submitted Interest</td><td>16</td></tr>
+</table>
+
+<!-- Section 2: New Deals This Week -->
+<h2><span class="section-icon">🆕</span>New Deals This Week</h2>
+
+<h3>Inflection — 3 New Deals</h3>
+<table>
+  <tr><th>Name</th><th>Stage</th><th>Date Created</th></tr>
+  <tr><td>Victor Adafinoaiei</td><td><span class="badge badge-blue">Interview Scheduled</span></td><td>Mar 16–22</td></tr>
+  <tr><td>Mek Monsereenusorn</td><td><span class="badge badge-amber">Submitted Initial Application</span></td><td>Mar 16–22</td></tr>
+  <tr><td>Charles Tan</td><td><span class="badge badge-amber">Submitted Full Application</span></td><td>Mar 16–22</td></tr>
+</table>
+
+<h3>Ancestra Jiao — 7 New Deals</h3>
+<table>
+  <tr><th>Name</th><th>Email</th><th>Stage</th><th>Date</th></tr>
+  <tr><td>Corey Zou</td><td>lzou1991@gmail.com</td><td><span class="badge badge-amber">Contacted - No Reply</span></td><td>Mar 16</td></tr>
+  <tr><td>Thomas Philippart</td><td>thomasphilippart.idu@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 17</td></tr>
+  <tr><td>Maor Bracha</td><td>maor.bracha@outlook.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 19</td></tr>
+  <tr><td>Mete Sozer</td><td>metesozer@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 20</td></tr>
+  <tr><td>shawn solhpour</td><td>shahrams@aol.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 21</td></tr>
+  <tr><td>Natan Fuhrmann</td><td>natanlonglong@hotmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 22</td></tr>
+  <tr><td>Robert Murray</td><td>rwmurray@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 23</td></tr>
+</table>
+
+<h3>Perception Xuan — 16 New Deals</h3>
+<table>
+  <tr><th>Name</th><th>Email</th><th>Stage</th><th>Date</th></tr>
+  <tr><td>Curry Leung</td><td>curryleung10@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 16</td></tr>
+  <tr><td>Dave Dopson</td><td>davedopson1@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 17</td></tr>
+  <tr><td>William Schultz</td><td>william.schultz45@aol.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 18</td></tr>
+  <tr><td>Benjamin Wattelet</td><td>benjamin.wattelet@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 18</td></tr>
+  <tr><td>Noah JOIGNY</td><td>noah.joigny05@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 18</td></tr>
+  <tr><td>John Rowney</td><td>laxbear3245@yahoo.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 19</td></tr>
+  <tr><td>Ambrose Lo</td><td>ambroselouk@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 19</td></tr>
+  <tr><td>John Mateyko</td><td>jgmateyko@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 19</td></tr>
+  <tr><td>Gilbert Jew</td><td>jewxx002@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 20</td></tr>
+  <tr><td>Saira Ramasastry</td><td>saira@lifesciencesadvisory.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 21</td></tr>
+  <tr><td>Tevin Francis</td><td>tevinfrancis121@yahoo.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 22</td></tr>
+  <tr><td>Jason Siau</td><td>Siau.jason@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 22</td></tr>
+  <tr><td>Tommy Cheng</td><td>tommycheng188@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 22</td></tr>
+  <tr><td>Daina Spisak</td><td>monkeyals5@yahoo.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 22</td></tr>
+  <tr><td>Ayusman Karthik</td><td>ayusman.karthik@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 23</td></tr>
+  <tr><td>Jason Lau</td><td>jasonlwkj@gmail.com</td><td><span class="badge badge-gray">Submitted Interest</span></td><td>Mar 23</td></tr>
+</table>
+
+<!-- Section 3: Shopify ↔ Monday.com Reconciliation -->
+<h2><span class="section-icon">🛒</span>Shopify ↔ Monday.com Reconciliation</h2>
+
+<h3>Shopify Orders This Week (Source of Truth)</h3>
+<table>
+  <tr><th>Order</th><th>Customer</th><th>Product</th><th>Total (HKD)</th><th>Payment</th><th>Country</th><th>CRM Match</th></tr>
+  <tr><td>AW7758</td><td>Antony Thomas Harris</td><td>Perception Xuan</td><td>$27,911.51</td><td><span class="badge badge-green">Paid</span></td><td>GB</td><td><span class="badge badge-red">Not in CRM</span></td></tr>
+  <tr><td>AW7757</td><td>Kevin KF CHAU</td><td>Perception Xuan</td><td>$28,000.00</td><td><span class="badge badge-amber">Pending</span></td><td>HK</td><td><span class="badge badge-red">Not in CRM</span></td></tr>
+  <tr><td>AW7756</td><td>Joern Lyder Hansen</td><td>Perception Xuan</td><td>$28,044.93</td><td><span class="badge badge-amber">Pending</span></td><td>NO</td><td><span class="badge badge-red">Not in CRM</span></td></tr>
+  <tr><td>AW7755</td><td>Jan Mathias Bjork</td><td>Perception Xuan</td><td>$28,000.00</td><td><span class="badge badge-green">Paid</span></td><td>HK</td><td><span class="badge badge-red">Not in CRM</span></td></tr>
+  <tr><td>AW7754</td><td>Sok Zhi Wei</td><td>Ancestra Launch Ed.</td><td>$45,735.52</td><td><span class="badge badge-green">Paid</span></td><td>SG</td><td><span class="badge badge-red">Not in CRM</span></td></tr>
+</table>
+
+<h3>Revenue Summary by Product</h3>
+<table>
+  <tr><th>Product</th><th>Units Sold</th><th>Revenue (HKD)</th></tr>
+  <tr><td>Perception 漩 (Xuán)</td><td>4</td><td>$111,956.44</td></tr>
+  <tr><td>Ancestra 蛟 (JIĀO) Launch Ed.</td><td>1</td><td>$45,735.52</td></tr>
+  <tr><td>Inflection</td><td>0</td><td>$0.00</td></tr>
+  <tr style="font-weight:700; background: rgba(99,102,241,0.05);"><td>Grand Total</td><td>5</td><td>$157,691.96</td></tr>
+</table>
+
+<div class="alert alert-red">
+  <strong>⚠️ Critical: 5/5 Shopify orders have no matching Monday.com Won Deal.</strong><br>
+  All orders were created via Draft Orders (manual/direct sales) and bypassed the CRM pipeline entirely. These customers need to be added to Monday.com and marked as Won Deals for accurate pipeline tracking.
+</div>
+
+<!-- Section 4: Klaviyo → Monday.com Cross-Check -->
+<h2><span class="section-icon">🔗</span>Klaviyo → Monday.com Cross-Check</h2>
+
+<h3>Form Submission → CRM Deal Creation</h3>
+<table>
+  <tr><th>Pipeline</th><th>Klaviyo Flow Recipients</th><th>Monday.com New Deals</th><th>Status</th></tr>
+  <tr><td>Inflection Form Flow</td><td>7 recipients (2 unique triggers)</td><td>3 new deals</td><td><span class="badge badge-green">OK</span></td></tr>
+  <tr><td>Ancestra Jiao</td><td>—</td><td>7 new deals</td><td><span class="badge badge-green">OK — via Tally/Zapier</span></td></tr>
+  <tr><td>Perception Xuan</td><td>—</td><td>16 new deals</td><td><span class="badge badge-green">OK — via Tally/Zapier</span></td></tr>
+</table>
+<div class="alert alert-green">
+  <strong>✅ Automation Health:</strong> Tally form → Zapier → Monday.com pipeline appears to be functioning correctly for all 3 products. All 26 new deals this week were successfully created in Monday.com from form submissions.
+</div>
+
+<!-- Section 5: Klaviyo Funnel Metrics -->
+<h2><span class="section-icon">📧</span>Klaviyo Flow Performance (Mar 16–23)</h2>
+<table>
+  <tr><th>Flow</th><th>Recipients</th><th>Delivered</th><th>Open Rate</th><th>Click Rate</th><th>Bounces</th></tr>
+  <tr><td>NEW Welcome Series</td><td>90</td><td>90</td><td><span class="green">68.9%</span></td><td>11.1%</td><td>0</td></tr>
+  <tr><td>Inflection Website Form Flow</td><td>7</td><td>7</td><td>57.1%</td><td>14.3%</td><td>0</td></tr>
+  <tr><td>Ancestra JIĀO Post-Purchase Follow Up</td><td>2</td><td>2</td><td><span class="green">100%</span></td><td>0%</td><td>0</td></tr>
+</table>
+<div class="card" style="margin-top:16px;">
+  <div class="card-title">Delivery Health</div>
+  <div class="card-value green">100%</div>
+  <div class="card-sub">Zero bounces across all flows this week. All 99 emails delivered successfully.</div>
+</div>
+
+<!-- Section 6: Action Items -->
+<h2><span class="section-icon">🚨</span>Action Items & Recommendations</h2>
+
+<div class="alert alert-red">
+  <strong>1. CRM Gap — 5 Shopify orders missing from Monday.com</strong><br>
+  All 5 orders this week were created via Draft Orders and do not have corresponding Monday.com deals. Create Won Deal entries for: Antony Thomas Harris (Xuan), Kevin KF CHAU (Xuan), Joern Lyder Hansen (Xuan), Jan Mathias Bjork (Xuan), and Sok Zhi Wei (Ancestra).
+</div>
+
+<div class="alert alert-amber">
+  <strong>2. New Pipeline Follow-Up Required</strong><br>
+  16 Perception Xuan deals and 6 Ancestra Jiao deals are sitting at "Submitted Interest" with no stage progression. Prioritize outreach this week — these are brand new pipelines with high initial momentum.
+</div>
+
+<div class="alert alert-amber">
+  <strong>3. Ancestra — Corey Zou at "Contacted - No Reply"</strong><br>
+  First Ancestra lead to advance beyond initial submission, but stuck at "Contacted - No Reply" since Mar 16. Consider a follow-up or alternative contact method.
+</div>
+
+<div class="alert alert-amber">
+  <strong>4. Inflection Pipeline — Stalled Mid-Funnel</strong><br>
+  24 leads stuck at "Invited To Interview" and 7 at "Interview Scheduled" — these represent the largest non-terminal segments. Review if interview scheduling/completion is a bottleneck.
+</div>
+
+<div class="alert alert-green">
+  <strong>5. Zapier Automations Operating Normally</strong><br>
+  All form-to-CRM automations appear healthy. 26 new deals created automatically across all 3 pipelines. No evidence of dropped submissions.
+</div>
+
+<!-- Won Deals Reference -->
+<h2><span class="section-icon">🏆</span>Monday.com Won Deals (All-Time Reference)</h2>
+<table>
+  <tr><th>Pipeline</th><th>Won Deals</th><th>New Won This Week</th></tr>
+  <tr><td>Inflection</td><td>33</td><td>0</td></tr>
+  <tr><td>Ancestra Jiao</td><td>0</td><td>0</td></tr>
+  <tr><td>Perception Xuan</td><td>0</td><td>0</td></tr>
+</table>
+
+<div class="footer">
+  Atelier Wen Sales Automation Audit · Generated automatically by Cowork · March 23, 2026
+</div>
+
+</div>
+</body>
+</html>
