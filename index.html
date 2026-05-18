@@ -86,7 +86,8 @@
 <div class="summary-bar">
   <span class="pill">31 new deals this week</span>
   <span class="pill">717 total deals across all pipelines</span>
-  <span class="pill">~$153K Klaviyo-attributed revenue (last 7d)</span>
+  <span class="pill">HKD 278K retail revenue (Shopify, 8 orders)</span>
+  <span class="pill">Reconciliation: clean</span>
   <span class="pill">52 stuck deals flagged</span>
 </div>
 
@@ -180,8 +181,49 @@
 </div>
 
 <h2>Shopify ↔ Monday.com Reconciliation</h2>
-<div class="note red">
-  <strong>Status:</strong> <span class="status-indicator"><span class="status-dot red"></span> Unavailable</span> — The Shopify MCP connector is not connected to this audit session. Sales-summary, order matching, and unmatched-deal/order tables cannot be produced this week. <strong>Action:</strong> Reconnect the Shopify connector so the next weekly run can complete this reconciliation. The four Ancestra "Won Deals" (Jennifer Yee, Alexandre Ayad, Vadim Popov, Ralph Azzi) and two Perception "Won Deals" (Rafael Olovsson, David Ettedgui) flagged this week should be manually cross-checked against Shopify in the meantime.
+<div class="note green">
+  <strong>Status:</strong> <span class="status-indicator"><span class="status-dot green"></span> Clean</span> — all 8 retail pipeline orders this week reconcile to Monday Won Deals. Two Ancestra Monday wins this week (Jennifer Yee, Alexandre Ayad) settled against Shopify orders from 2026-05-07 (placed before the audit window — normal CRM lag).
+</div>
+
+<h3>Sales Summary (May 11–17, 2026)</h3>
+<table>
+  <tr><th>Product</th><th class="num">Units</th><th class="num">Subtotal (HKD)</th></tr>
+  <tr><td>Inflection (no Shopify SKUs this week)</td><td class="num">0</td><td class="num">0.00</td></tr>
+  <tr><td>Ancestra - Launch Edition</td><td class="num">3</td><td class="num">137,579.86</td></tr>
+  <tr><td>Millésime 2025 - Perception 漩 (Xuán)</td><td class="num">5</td><td class="num">140,938.02</td></tr>
+  <tr style="border-top: 2px solid var(--border);"><td><strong>Retail pipeline total</strong></td><td class="num"><strong>8</strong></td><td class="num"><strong>278,517.88</strong></td></tr>
+  <tr><td>Perception v3 (B2B, pending payment)</td><td class="num">11</td><td class="num">423,632.22</td></tr>
+  <tr><td>Perception FKM Strap (accessory)</td><td class="num">2</td><td class="num">4,529.28</td></tr>
+</table>
+
+<h3>Shopify → Monday (retail order matching)</h3>
+<table>
+  <tr><th>Order</th><th>Date</th><th>Email</th><th>Product</th><th class="num">HKD</th><th>Match</th></tr>
+  <tr><td>AW7794</td><td>2026-05-11</td><td>vadimpopov@yahoo.com</td><td>Ancestra Launch Edition</td><td class="num">45,900.00</td><td><span class="badge won">Vadim Popov — Won (5/11)</span></td></tr>
+  <tr><td>AW7795</td><td>2026-05-11</td><td>rafael.olovsson@gmail.com</td><td>Perception Xuán</td><td class="num">28,469.01</td><td><span class="badge won">Rafael Olovsson — Won (5/11)</span></td></tr>
+  <tr><td>AW7797</td><td>2026-05-13</td><td>frederic.b.beaufils@orange.fr</td><td>Perception Xuán</td><td class="num">28,469.01</td><td><span class="badge won">Frederic Beaufils — Won (4/26)</span></td></tr>
+  <tr><td>AW7799</td><td>2026-05-14</td><td>ralfazzi@gmail.com</td><td>Ancestra Launch Edition</td><td class="num">48,582.49</td><td><span class="badge won">Ralph Azzi — Won (5/14)</span></td></tr>
+  <tr><td>AW7800</td><td>2026-05-14</td><td>glostrittojr@steelequities.com</td><td>Ancestra Launch Edition</td><td class="num">48,582.49</td><td><span class="badge won">Glenn Lostritto — Won (5/2)</span></td></tr>
+  <tr><td>AW7801</td><td>2026-05-14</td><td>manush11112001@gmail.com</td><td>Perception Xuán</td><td class="num">28,000.00</td><td><span class="badge won">Manush P — Won (3/26)</span></td></tr>
+  <tr><td>AW7802</td><td>2026-05-14</td><td>michaeltmhui@gmail.com</td><td>Perception Xuán</td><td class="num">28,000.00</td><td><span class="badge won">Michael TM Hui — Won (5/5)</span></td></tr>
+  <tr><td>AW7803</td><td>2026-05-14</td><td>david.e@callistogroup.org</td><td>Perception Xuán</td><td class="num">28,000.00</td><td><span class="badge won">David Ettedgui — Won (5/14)</span></td></tr>
+</table>
+
+<h3>Out-of-pipeline Shopify orders this week</h3>
+<table>
+  <tr><th>Order</th><th>Date</th><th>Email</th><th>Type</th><th class="num">HKD</th><th>Note</th></tr>
+  <tr><td>AW7798</td><td>2026-05-14</td><td>asher@collectivehorology.com</td><td>B2B (Collective Horology)</td><td class="num">279,245.81</td><td><span class="badge inprog">Pending payment — not in pipeline boards</span></td></tr>
+  <tr><td>AW7796</td><td>2026-05-12</td><td>mikijale52@gmail.com</td><td>Accessory only (strap)</td><td class="num">2,299.28</td><td><span class="badge submit">No CRM record — accessory purchase</span></td></tr>
+</table>
+
+<h3>Unmatched Monday Won Deals this week (settled outside audit window)</h3>
+<table>
+  <tr><th>Pipeline</th><th>Name</th><th>Email</th><th>Monday Won Date</th><th>Shopify Order</th></tr>
+  <tr><td>Ancestra</td><td>Jennifer Yee</td><td>yee.jayneefoh@gmail.com</td><td>2026-05-11</td><td>AW7791 placed 2026-05-07 (paid HKD 48,582.49)</td></tr>
+  <tr><td>Ancestra</td><td>Alexandre Ayad</td><td>alexandre@ik.me</td><td>2026-05-11</td><td>AW7790 placed 2026-05-07 (paid HKD 46,817.07)</td></tr>
+</table>
+<div class="note">
+  These represent the typical lag between Shopify order placement and Monday "Won Deals" stage update — Shopify is source of truth; both deals are fully paid. Worth noting because revenue is captured but appears in different reporting windows.
 </div>
 
 <h2>Klaviyo Flow Performance — Last 7 Days</h2>
@@ -253,7 +295,7 @@
 <h2>Action Items</h2>
 
 <div class="action-item">
-  <strong>1. Reconnect Shopify MCP.</strong> Step 3 of the audit (Shopify ↔ Monday reconciliation) was not executable this week — Shopify connector is missing. This is the most material control gap right now since revenue-completeness can't be verified.
+  <strong>1. Collective Horology B2B order pending.</strong> AW7798 (HKD 279,245.81 for 11 Perception v3 units) is pending payment as of 2026-05-14. Follow up on AR collection.
 </div>
 
 <div class="action-item">
