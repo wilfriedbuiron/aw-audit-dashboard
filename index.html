@@ -3,300 +3,369 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atelier Wen — Weekly Pipeline Audit · Jun 8–15, 2026</title>
+<title>Atelier Wen — Weekly Pipeline Audit</title>
 <style>
   :root{
-    --bg:#0e1116; --panel:#161b22; --panel2:#1c232d; --line:#2a323d;
-    --ink:#e6edf3; --muted:#9aa7b4; --accent:#c8a45c; --accent2:#7e9cd8;
-    --green:#2ea043; --amber:#d29922; --red:#da3633; --chip:#21262d;
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --line:#2a2f3a;
+    --txt:#e7e9ee; --muted:#9aa3b2; --accent:#c8a96a; --accent2:#7e3b8a;
+    --green:#2fbf71; --amber:#e8a13a; --red:#e0556a; --blue:#4d8df6;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.5;font-size:15px}
-  .wrap{max-width:1080px;margin:0 auto;padding:32px 22px 80px}
+  body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:32px 22px 80px}
   header.top{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:28px}
-  .brand{letter-spacing:.22em;font-size:12px;color:var(--accent);text-transform:uppercase;font-weight:600}
-  h1{font-size:27px;margin:8px 0 6px;font-weight:650}
-  .sub{color:var(--muted);font-size:13.5px}
-  h2{font-size:18px;margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:620}
-  h3{font-size:15px;margin:22px 0 8px;color:var(--accent2);font-weight:600}
-  .grid{display:grid;gap:14px}
+  h1{font-size:26px;margin:0 0 6px;letter-spacing:.3px}
+  h1 .mark{color:var(--accent)}
+  .sub{color:var(--muted);font-size:14px}
+  h2{font-size:19px;margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  h3{font-size:15px;margin:20px 0 8px;color:var(--accent)}
+  .grid{display:grid;gap:16px}
   .g3{grid-template-columns:repeat(3,1fr)}
   .g4{grid-template-columns:repeat(4,1fr)}
-  @media(max-width:760px){.g3,.g4{grid-template-columns:1fr 1fr}}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
-  .card .k{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
-  .card .v{font-size:26px;font-weight:680;margin-top:6px}
-  .card .d{color:var(--muted);font-size:12px;margin-top:4px}
-  table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:13.5px}
-  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-  th{color:var(--muted);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}
-  tr:hover td{background:#12171e}
+  @media(max-width:880px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .kpi{font-size:30px;font-weight:700;margin:2px 0}
+  .kpi.sm{font-size:22px}
+  .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+  table{width:100%;border-collapse:collapse;margin:6px 0 4px;font-size:13.5px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.4px}
   td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
-  .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600;border:1px solid var(--line);background:var(--chip)}
-  .pill.green{color:#7ee2a8;border-color:#1f6f3c}
-  .pill.amber{color:#f0c66b;border-color:#7a5a14}
-  .pill.red{color:#ff8b86;border-color:#7a2422}
-  .pill.grey{color:var(--muted)}
-  .statusbar{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:12px;border:1px solid var(--line);margin:6px 0 4px}
-  .statusbar.red{background:rgba(218,54,51,.08);border-color:#7a2422}
-  .dot{width:14px;height:14px;border-radius:50%;flex:none}
-  .dot.red{background:var(--red)}
-  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 18px 14px;margin-top:8px}
-  ul.items{list-style:none;padding:0;margin:8px 0}
-  ul.items li{padding:10px 0;border-bottom:1px solid var(--line);display:flex;gap:10px}
-  ul.items li:last-child{border-bottom:0}
-  .ico{flex:none}
+  tr:last-child td{border-bottom:none}
+  .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600;border:1px solid var(--line)}
+  .pill.green{color:#bff3d6;background:rgba(47,191,113,.13);border-color:rgba(47,191,113,.4)}
+  .pill.amber{color:#f6dcab;background:rgba(232,161,58,.13);border-color:rgba(232,161,58,.4)}
+  .pill.red{color:#f6c0c9;background:rgba(224,85,106,.13);border-color:rgba(224,85,106,.4)}
+  .pill.blue{color:#cfe0fb;background:rgba(77,141,246,.13);border-color:rgba(77,141,246,.4)}
+  .pill.grey{color:#cdd3dd;background:rgba(154,163,178,.12)}
+  .status-banner{display:flex;align-items:center;gap:14px;border-radius:12px;padding:14px 18px;border:1px solid;margin:6px 0 2px}
+  .status-banner.red{background:rgba(224,85,106,.1);border-color:rgba(224,85,106,.45)}
+  .dot{width:12px;height:12px;border-radius:50%;flex:none}
+  .dot.red{background:var(--red)} .dot.amber{background:var(--amber)} .dot.green{background:var(--green)}
   .muted{color:var(--muted)}
   .small{font-size:12.5px}
-  code{background:#0b0e13;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12.5px;color:#d6c08a}
-  .note{font-size:12.5px;color:var(--muted);font-style:italic;margin:6px 0}
-  footer{margin-top:46px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:12px}
-  .legend{font-size:12px;color:var(--muted);margin:2px 0 10px}
-  .barwrap{background:#0b0e13;border-radius:6px;height:9px;overflow:hidden;border:1px solid var(--line);margin-top:6px}
-  .bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  ul.clean{margin:6px 0;padding-left:18px}
+  ul.clean li{margin:4px 0}
+  .flag{border-left:3px solid var(--amber);padding:8px 12px;margin:8px 0;background:var(--panel2);border-radius:0 8px 8px 0}
+  .flag.red{border-color:var(--red)}
+  .flag.blue{border-color:var(--blue)}
+  .bar{height:8px;border-radius:6px;background:var(--panel2);overflow:hidden;margin-top:6px}
+  .bar > span{display:block;height:100%}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   @media(max-width:760px){.two{grid-template-columns:1fr}}
-  .flag{color:#ff8b86;font-weight:600}
-  .ok{color:#7ee2a8;font-weight:600}
+  code{background:var(--panel2);padding:1px 6px;border-radius:5px;font-size:12.5px;color:#d8c89c}
+  footer{margin-top:50px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:12.5px}
+  .legend{font-size:12px;color:var(--muted);margin-top:4px}
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <header class="top">
-  <div class="brand">Atelier Wen · Sales Automation</div>
-  <h1>Automated Weekly Pipeline Audit</h1>
-  <div class="sub">Reporting period: <strong>8 – 15 June 2026</strong> · Generated 2026-06-15 11:58 UTC · by Claude</div>
+  <h1><span class="mark">Atelier Wen</span> — Automated Weekly Pipeline Audit</h1>
+  <div class="sub">Reporting period: <strong>16–23 June 2026</strong> &nbsp;·&nbsp; Generated by Claude on 24 June 2026 &nbsp;·&nbsp; Pipelines: Inflection · Ancestra Jiao · Perception Xuan</div>
 </header>
 
-<section>
-  <div class="grid g4">
-    <div class="card"><div class="k">New deals this week</div><div class="v">122</div><div class="d">Inflection 29 · Ancestra 31 · Perception 62</div></div>
-    <div class="card"><div class="k">Confirmed sales (Shopify)</div><div class="v">HK$781k</div><div class="d">10 watches across 3 pipelines</div></div>
-    <div class="card"><div class="k">Deals won this week</div><div class="v">8</div><div class="d">2 Inflection · 4 Ancestra · 2 Perception</div></div>
-    <div class="card"><div class="k">Reconciliation</div><div class="v"><span class="pill red">● Red</span></div><div class="d">2 untracked sales (20%)</div></div>
-  </div>
-</section>
+<!-- HEADLINE KPIs -->
+<div class="grid g4">
+  <div class="card"><div class="label">New deals this week</div><div class="kpi">51</div><div class="small muted">Inflection 6 · Ancestra 13 · Perception 32</div></div>
+  <div class="card"><div class="label">Won this week (CRM)</div><div class="kpi">7</div><div class="small muted">Ancestra 2 · Perception 5 · Inflection 0</div></div>
+  <div class="card"><div class="label">Shopify orders (3 lines)</div><div class="kpi">20</div><div class="small muted">HKD 811,935 line-item revenue</div></div>
+  <div class="card"><div class="label">Reconciliation status</div><div class="kpi sm"><span class="pill red">RED</span></div><div class="small muted">10 orders not marked Won in CRM</div></div>
+</div>
 
+<!-- PIPELINE OVERVIEW -->
 <h2>1 · Pipeline Overview</h2>
 <div class="grid g3">
 
   <div class="card">
     <h3 style="margin-top:4px">Inflection</h3>
-    <div class="small muted">Board 5021567647 · <strong style="color:var(--ink)">442 deals</strong></div>
+    <div class="small muted" style="margin-bottom:6px">449 deals total · 44 Won (9.8%)</div>
     <table>
-      <tr><td>Submitted Initial Application</td><td class="num">42</td></tr>
-      <tr><td>Submitted Full Application</td><td class="num">11</td></tr>
-      <tr><td>Invited To Interview</td><td class="num">38</td></tr>
-      <tr><td>Interview Scheduled</td><td class="num">7</td></tr>
-      <tr><td>Interview Completed - Allocation(s) Pending</td><td class="num">6</td></tr>
-      <tr><td>Allocation(s) Offered</td><td class="num">9</td></tr>
-      <tr><td>Closing - Invoice Sent</td><td class="num">0</td></tr>
-      <tr><td><span class="ok">Won Deals</span></td><td class="num">44</td></tr>
-      <tr><td><span class="muted">Lost Deals</span></td><td class="num">285</td></tr>
+      <tr><td>Lost Deals</td><td class="num">291</td></tr>
+      <tr><td>Won Deals</td><td class="num">44</td></tr>
+      <tr><td>Invited To Interview</td><td class="num">44</td></tr>
+      <tr><td>Submitted Initial Application</td><td class="num">41</td></tr>
+      <tr><td>Allocation(s) Offered</td><td class="num">13</td></tr>
+      <tr><td>Interview Scheduled</td><td class="num">6</td></tr>
+      <tr><td>Submitted Full Application</td><td class="num">5</td></tr>
+      <tr><td>Interview Completed - Allocation(s) Pending</td><td class="num">4</td></tr>
+      <tr><td>Closing - Invoice Sent</td><td class="num">1</td></tr>
     </table>
   </div>
 
   <div class="card">
     <h3 style="margin-top:4px">Ancestra Jiao</h3>
-    <div class="small muted">Board 5027142339 · <strong style="color:var(--ink)">206 deals</strong></div>
+    <div class="small muted" style="margin-bottom:6px">221 deals total · 18 Won (8.1%)</div>
     <table>
-      <tr><td>Submitted Interest</td><td class="num">33</td></tr>
-      <tr><td>Contacted - No Reply</td><td class="num">61</td></tr>
+      <tr><td>Lost Deals</td><td class="num">110</td></tr>
+      <tr><td>Contacted - No Reply</td><td class="num">74</td></tr>
+      <tr><td>Won Deals</td><td class="num">18</td></tr>
+      <tr><td>Submitted Interest</td><td class="num">15</td></tr>
       <tr><td>Interested - In Discussion</td><td class="num">4</td></tr>
       <tr><td>Interested - Invoice Sent</td><td class="num">0</td></tr>
-      <tr><td><span class="ok">Won Deals</span></td><td class="num">15</td></tr>
-      <tr><td><span class="muted">Lost Deals</span></td><td class="num">93</td></tr>
     </table>
+    <div class="legend">+1 lead manually added during audit (Allen Hu → Submitted Interest)</div>
   </div>
 
   <div class="card">
     <h3 style="margin-top:4px">Perception Xuan</h3>
-    <div class="small muted">Board 5027142326 · <strong style="color:var(--ink)">355 deals</strong></div>
+    <div class="small muted" style="margin-bottom:6px">388 deals total · 22 Won (5.7%)</div>
     <table>
-      <tr><td>Submitted Interest</td><td class="num">67</td></tr>
-      <tr><td>Contacted - No Reply</td><td class="num">106</td></tr>
-      <tr><td>Interested - In Discussion</td><td class="num">3</td></tr>
+      <tr><td>Lost Deals</td><td class="num">176</td></tr>
+      <tr><td>Contacted - No Reply</td><td class="num">146</td></tr>
+      <tr><td>Submitted Interest</td><td class="num">37</td></tr>
+      <tr><td>Won Deals</td><td class="num">22</td></tr>
       <tr><td>Interested - Invoice Sent</td><td class="num">4</td></tr>
-      <tr><td><span class="ok">Won Deals</span></td><td class="num">17</td></tr>
-      <tr><td><span class="muted">Lost Deals</span></td><td class="num">158</td></tr>
+      <tr><td>Interested - In Discussion</td><td class="num">3</td></tr>
+    </table>
+    <div class="legend">+1 lead manually added during audit (Siddharth Vadlamani → Submitted Interest)</div>
+  </div>
+</div>
+
+<!-- NEW DEALS -->
+<h2>2 · New Deals This Week (51)</h2>
+
+<div class="card">
+  <h3 style="margin-top:4px">Inflection — 6 new <span class="pill grey">mixed stages</span></h3>
+  <table>
+    <tr><th>Name</th><th>Country</th><th>Stage</th></tr>
+    <tr><td>Tornike  Gogichaishvili</td><td>GE</td><td>Invited To Interview</td></tr>
+    <tr><td>Philip von Hellfeld</td><td>DE</td><td>Submitted Initial Application</td></tr>
+    <tr><td>Victor E. Almeida</td><td>US</td><td>Submitted Full Application</td></tr>
+    <tr><td>Parikshith Sumathi</td><td>US</td><td>Invited To Interview</td></tr>
+    <tr><td>Luis Barbosa</td><td>US</td><td>Submitted Initial Application</td></tr>
+    <tr><td>Will Lu</td><td>US</td><td>Submitted Initial Application</td></tr>
+  </table>
+</div>
+
+<div class="two" style="margin-top:16px">
+  <div class="card">
+    <h3 style="margin-top:4px">Ancestra Jiao — 13 new</h3>
+    <div class="small muted">12 in Submitted Interest · 1 in Contacted - No Reply</div>
+    <table>
+      <tr><th>Name</th><th>Country</th><th>Stage</th></tr>
+      <tr><td>Hector Negron</td><td>US</td><td>Contacted - No Reply</td></tr>
+      <tr><td>Jimmy Hwang</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Eric Goodness</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Doug Barnes</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Oscar Tsang</td><td>HK</td><td>Submitted Interest</td></tr>
+      <tr><td>Arthur Lemoine</td><td>FR</td><td>Submitted Interest</td></tr>
+      <tr><td>Luis Barbosa</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Giorgio Orsi</td><td>UK</td><td>Submitted Interest</td></tr>
+      <tr><td>Josh Cave</td><td>UK</td><td>Submitted Interest</td></tr>
+      <tr><td>Y Y</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Khang Ting</td><td>HK</td><td>Submitted Interest</td></tr>
+      <tr><td>Abdulmecit Keles</td><td>TR</td><td>Submitted Interest</td></tr>
+      <tr><td>Randy Hirujo Garcia</td><td>DO</td><td>Submitted Interest</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:4px">Perception Xuan — 32 new</h3>
+    <div class="small muted">28 in Submitted Interest · 4 in Contacted - No Reply</div>
+    <table>
+      <tr><th>Name</th><th>Country</th><th>Stage</th></tr>
+      <tr><td>Jonathan Spence</td><td>CA</td><td>Submitted Interest</td></tr>
+      <tr><td>Giuseppe Ringoli</td><td>IT</td><td>Submitted Interest</td></tr>
+      <tr><td>Peter Negron</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Bond Man</td><td>NL</td><td>Submitted Interest</td></tr>
+      <tr><td>Sean Thamrin</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Arslan Askarov</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Sahaj Anand</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Jack Lin</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>dayuan xu</td><td>AE</td><td>Submitted Interest</td></tr>
+      <tr><td>Daniel Ng</td><td>CA</td><td>Submitted Interest</td></tr>
+      <tr><td>Radosław Dąbrowski</td><td>PL</td><td>Submitted Interest</td></tr>
+      <tr><td>Phil K</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Christian Dy</td><td>PH</td><td>Submitted Interest</td></tr>
+      <tr><td>Allen Bagdasian</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Bailey Ryan</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Carl romero</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Mounir Slamnia</td><td>FR</td><td>Submitted Interest</td></tr>
+      <tr><td>Ezio Fama</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Romano Oresic</td><td>HR</td><td>Submitted Interest</td></tr>
+      <tr><td>Luis Barbosa</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>ka wun lee</td><td>HK</td><td>Submitted Interest</td></tr>
+      <tr><td>Lasse Andersen</td><td>DK</td><td>Submitted Interest</td></tr>
+      <tr><td>Robert-Mitchel Webster</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Benjamin Dai</td><td>US</td><td>Submitted Interest</td></tr>
+      <tr><td>Raúl Ortiz</td><td>CR</td><td>Submitted Interest</td></tr>
+      <tr><td>Sean Obrien</td><td>UK</td><td>Submitted Interest</td></tr>
+      <tr><td>Syed Yasir Nafees</td><td>AE</td><td>Submitted Interest</td></tr>
+      <tr><td>Florian Dunker</td><td>DE</td><td>Submitted Interest</td></tr>
+      <tr><td>Etai Platt</td><td>US</td><td>Contacted - No Reply</td></tr>
+      <tr><td>Scottmichael O'Leary</td><td>US</td><td>Contacted - No Reply</td></tr>
+      <tr><td>Hector Negron</td><td>US</td><td>Contacted - No Reply</td></tr>
+      <tr><td>Hans-Christian Torpe</td><td>NO</td><td>Contacted - No Reply</td></tr>
     </table>
   </div>
 </div>
 
-<h2>2 · New Deals This Week</h2>
-<div class="legend">122 new leads entered the three pipelines between 8–15 June. Ancestra &amp; Perception new leads all landed in <code>Submitted Interest</code>; Inflection leads spread across the early application stages.</div>
-
-<h3>Ancestra Jiao — 31 new leads (all in Submitted Interest)</h3>
-<div class="panel small">
-Chi Chun Chen (TW), Zuhayr Khakwani (AE), William McGroarty (US), Uriah Dorian (US), Ahmad Al Ateeqi (US), Ryan Huck (US), Thomas Berndt (UK), Thiago Cardoso Araujo (BR), Ryan Swift (US), Ivan Munoz (AE), Edouard Tchibozo (US), mahyar nourikalouri (US), Lloyd Richardson (UK), Joe Eccleston (UK), Eelco Bikker (NL), James Chilton (CH), Vladimir Konchakov (DE), michael jørgensen (DK), Will Canty-Collins (UK), Kevin Ryan (US), Bo Bo Zaw Chit Hlaing (MM), Adam Myers (UK), Nitin Thomas (UK), Herman Cheung (UK), Seth Hurwitz (US), Ive Steenge (NL), Jesse Wolgamott (US), David Mejias (US), Vitaliy Katsenelson (US), Michael Moran (US), Bruno Walkowiak (US).
-</div>
-
-<h3>Perception Xuan — 62 new leads (all in Submitted Interest)</h3>
-<div class="panel small">
-Carlos Garcia Geronis, Jean-Sébastien Genest, Alfredo Medina (US), Cy Ty (SG), Peter Hardiman (UK), Rene Vasquez (US), Georgios Papaioannou (FR), Brandon Lipscomb (US), Ahmad Al Ateeqi (KW), Zuhayr Khakwani (AE), Victor Camarillo (MX), max au (HK), alan northcutt (US), Jaimin Desai (US), Muhammad Faisal (SG), Yuva a (US), Chris Relph (AU), BORIS BERTHAUT (FR), Odysseas Trakadas (UK), Alexander Charles Heyser (DE), Travis Fitzpatrick (US), Pranav Kakad (PT), anees bishara (IL), Funes Gallanzi (MX), Thad Markham (US), Okan Arin (TR), Jonathan Martinez (US), Pranavi Nichenametla (AU), deon tay (SG), Nikhil Pandey (IN), Himanshu Kanabar (KE), Bastien Hudelot (FR), Marek Piekos (US), Edouard Tchibozo (US), Gurjinder Bassi (UK), Ahmer Shirazes (CA), Lloyd Richardson (UK), ABDELMONEM ABDELMONEM (AE), Ahmed Sultan Abdul Raqeeb (HK), Mohammad Sadman Shabab Hossain (CA), Klas Risveden (CH), Oliver Chen (UK), Charles Leung (US), Riley Jones (US), Christopher Wright (US), Ganesh Hanumanthu (UK), Alessandro Maschio (UK), Michal Devine (UK), Jorge Carrasco (AR), Yaman Karachodzhukov (BG), Gee Shek (UK), Louis Edozie (UK), Paul Adesoji (UK), Thomas Underwood (UK), Malathi Nagabhirava (US), Jia Xiu Sai (MY), Aiden Hong (SG), Darren Perez (US), Bruno Walkowiak (US), Wagner Gesser (BR), MICHAEL AMOS (US), Ramon Mas Aguilera (AW).
-</div>
-
-<h3>Inflection — 29 new leads</h3>
-<div class="panel small">
-<span class="muted">Submitted Initial Application:</span> Dheeraj Adusumilli (IN), Omair Azad (US), Yotam Shochat (US), Parth Sharma (IN), Caleb Howard (US), Jian Jing Tan (SG), Parth Bhosale (IN), Thomas Darby (UK), Sreekanth M V (IN), Sanat Zaveri (IN), Theodore Tracey (CA), Jose Gomes (US), theo nilsson (SE), Adam Gess (IL), Benjamin Tamras (US), Jakub Brecka (UK), Sibi Arul (Unknown), Anoop Anugraha (UK).<br>
-<span class="muted">Submitted Full Application:</span> Antonio Gaetani (IT), Raphael Suissa (FR), Abdelhakim Nassif (MA), Yelena Agora (US), Benjamin Tamras (Unknown), Bo Bo Zaw Chit Hlaing (MM), Steve Spina (Unknown).<br>
-<span class="muted">Invited To Interview:</span> Nikola Goranov (US), George Bergamo (US), Karen Francis (UK), Alvar Merjamaa (FI).
-</div>
-
+<!-- SHOPIFY RECONCILIATION -->
 <h2>3 · Shopify ↔ Monday.com Reconciliation</h2>
 
-<div class="statusbar red">
+<div class="status-banner red">
   <span class="dot red"></span>
   <div>
-    <strong>Status: RED</strong> — discrepancy rate 20% (2 of 10 in-scope orders unmatched), above the 10% threshold.
-    <div class="small muted">Shopify is source of truth. Currency: HKD. Revenue figures are gross sales (line price × qty, before discounts/shipping/tax).</div>
+    <strong>Status: RED</strong> — 10 of 17 pipeline Shopify orders this week have no corresponding "Won Deals" entry in Monday for the period (discrepancy ≈ 59%, above the 10% threshold).
+    <div class="small muted" style="margin-top:3px">Several unmatched orders were placed same-day or are payment-pending, so part of this gap reflects normal CRM-update lag rather than confirmed data loss — but each needs a status update in the CRM.</div>
   </div>
 </div>
 
-<h3>3A · Sales Summary — confirmed Shopify sales (8–15 Jun)</h3>
-<table>
-  <tr><th>Pipeline product</th><th class="num">Units</th><th class="num">Gross subtotal (HKD)</th></tr>
-  <tr><td>Inflection (watch bundle)</td><td class="num">2</td><td class="num">467,420.86</td></tr>
-  <tr><td>Ancestra Jiao (Launch Edition)</td><td class="num">5</td><td class="num">229,380.58</td></tr>
-  <tr><td>Perception Xuan (Millésime 2025 Xuán)</td><td class="num">3</td><td class="num">84,629.33</td></tr>
-  <tr><td><strong>Grand total — 3 audited pipelines</strong></td><td class="num"><strong>10</strong></td><td class="num"><strong>781,430.77</strong></td></tr>
-</table>
-<p class="note">Scope decision (autonomous run): "Perception Xuan" = the Millésime Xuán allocation product that the Perception Xuan pipeline/board tracks. The standard in-stock <strong>"Perception v3"</strong> is a separate SKU and is reported below for awareness but excluded from pipeline reconciliation. If v3 should be in scope, treat its 7 orders as additional unmatched sales.</p>
-<table>
-  <tr><th>Related (out-of-pipeline) product</th><th class="num">Units</th><th class="num">Gross subtotal (HKD)</th></tr>
-  <tr><td class="muted">Perception v3 (standard in-stock model)</td><td class="num">7</td><td class="num">266,049.13</td></tr>
-</table>
+<div class="flag blue small">
+  <strong>Data-source note:</strong> The dedicated Shopify connector was not available in this run. Shopify orders were sourced via Klaviyo's Shopify integration (the <code>Placed Order</code> metric, RVRkPM). Figures are in <strong>HKD</strong> (store currency). Reconnecting the Shopify MCP would allow direct, line-level reconciliation.
+</div>
 
-<h3>3B · Deals marked Won in Monday this week — 8</h3>
-<table>
-  <tr><th>Deal</th><th>Pipeline</th><th>Date won</th><th>Shopify match</th></tr>
-  <tr><td>Santiago Reil</td><td>Inflection</td><td>2026-06-10</td><td><span class="ok">AW7916 ✓</span></td></tr>
-  <tr><td>Ralph Azzi</td><td>Inflection</td><td>2026-06-10</td><td><span class="ok">AW7912 ✓</span></td></tr>
-  <tr><td>Steven Fayne</td><td>Ancestra Jiao</td><td>2026-06-08</td><td><span class="ok">AW7907 ✓</span></td></tr>
-  <tr><td>John Albert</td><td>Ancestra Jiao</td><td>2026-06-09</td><td><span class="ok">AW7910 ✓</span></td></tr>
-  <tr><td>Omar Bakarbashat</td><td>Ancestra Jiao</td><td>2026-06-09</td><td><span class="ok">AW7911 ✓</span></td></tr>
-  <tr><td>Samir Y</td><td>Ancestra Jiao</td><td>2026-06-10</td><td><span class="ok">AW7919 ✓</span></td></tr>
-  <tr><td>Gershon Rosenberg</td><td>Perception Xuan</td><td>2026-06-08</td><td><span class="ok">AW7908 ✓</span></td></tr>
-  <tr><td>Piyush Sharma</td><td>Perception Xuan</td><td>2026-06-10</td><td><span style="color:#f0c66b">AW7918 ⚠ email mismatch</span></td></tr>
-</table>
-<p class="note">5 of the 8 jumped straight from <code>Contacted - No Reply</code> to <code>Won Deals</code> (Steven Fayne, Omar Bakarbashat, Samir Y, Gershon Rosenberg, Piyush Sharma) — no intermediate stage. All are backed by a real Shopify order, so likely fast closes, but worth spot-checking.</p>
+<h3>3A · Sales summary (three pipelines)</h3>
+<div class="card">
+  <table>
+    <tr><th>Product</th><th class="num">Units sold</th><th class="num">Subtotal revenue (HKD)</th></tr>
+    <tr><td>Inflection</td><td class="num">1</td><td class="num">154,114.10</td></tr>
+    <tr><td>Ancestra Jiao</td><td class="num">2</td><td class="num">91,520.79</td></tr>
+    <tr><td>Perception Xuan</td><td class="num">17</td><td class="num">566,300.02</td></tr>
+    <tr><td><strong>Grand total</strong></td><td class="num"><strong>20</strong></td><td class="num"><strong>811,934.91</strong></td></tr>
+  </table>
+  <div class="legend">Store-wide: 18 orders, HKD 796,407.92 order value · 1 non-pipeline order (FKM rubber strap, HKD 2,258.18). Line-item subtotals are gross of discount; order value is net — the two are not directly additive.</div>
+</div>
 
-<h3>3C · Shopify orders with no matching Won deal in Monday</h3>
-<table>
-  <tr><th>Order</th><th>Customer email</th><th>Product</th><th class="num">Amount (HKD)</th><th>Date</th></tr>
-  <tr><td>AW7913</td><td class="flag">patrick@barlascollection.com</td><td>Ancestra Launch Edition</td><td class="num">45,848.56</td><td>2026-06-10</td></tr>
-  <tr><td>AW7914</td><td class="flag">patrick@barlascollection.com</td><td>Perception Xuán</td><td class="num">28,214.50</td><td>2026-06-10</td></tr>
-</table>
-<p class="note"><strong>Confirmed gap:</strong> <code>patrick@barlascollection.com</code> placed 3 orders this week (Ancestra AW7913, Perception Xuán AW7914, Perception v3 AW7915 — ~HK$116k total) and has <strong>no deal at all</strong> in any Monday board. These completed sales are entirely untracked in the CRM.</p>
+<h3>3C · Unmatched Shopify orders — sales not marked Won in CRM (10)</h3>
+<div class="card">
+  <table>
+    <tr><th>Order</th><th>Customer email</th><th>Product</th><th class="num">Amount (HKD)</th><th>Date</th></tr>
+    <tr><td>AW7945</td><td>budi.jaya26@gmail.com</td><td>Inflection</td><td class="num">154,114.10</td><td>2026-06-24*</td></tr>
+    <tr><td>AW7944</td><td>milo.simons@gmail.com</td><td>Perception</td><td class="num">55,539.38</td><td>2026-06-24</td></tr>
+    <tr><td>AW7941</td><td>justin.dai7238@gmail.com</td><td>Perception</td><td class="num">40,297.11</td><td>2026-06-22</td></tr>
+    <tr><td>AW7940</td><td>darrennlam@gmail.com</td><td>Perception</td><td class="num">37,750.00</td><td>2026-06-22</td></tr>
+    <tr><td>AW7939</td><td>vinaydayaram@gmail.com</td><td>Perception</td><td class="num">37,750.00</td><td>2026-06-19</td></tr>
+    <tr><td>AW7938</td><td>jrogenhofer@icloud.com</td><td>Perception</td><td class="num">37,747.25</td><td>2026-06-19</td></tr>
+    <tr><td>AW7936</td><td>sboppana28@yahoo.com</td><td>Perception</td><td class="num">40,290.84</td><td>2026-06-18</td></tr>
+    <tr><td>AW7935</td><td>megan@timeandtidewatches.com</td><td>Perception ×3</td><td class="num">98,074.12</td><td>2026-06-18</td></tr>
+    <tr><td>AW7933</td><td>kerli@thelimitededition.co.uk</td><td>Perception</td><td class="num">26,737.83</td><td>2026-06-17</td></tr>
+    <tr><td>AW7930</td><td>edwardl25@yahoo.com</td><td>Perception</td><td class="num">29,903.14</td><td>2026-06-16</td></tr>
+  </table>
+  <div class="legend">*AW7945 is payment-pending. AW7935 (Megan Connors, Time+Tide) and AW7933 (The Limited Edition) appear to be press/retail-partner orders. These deals exist on the boards at earlier stages but were not moved to "Won Deals" within the period.</div>
+</div>
 
-<h3>3D · Monday Won deals with no matching Shopify order</h3>
-<p class="small"><span class="ok">None.</span> All 8 deals marked Won this week have a confirmed Shopify transaction. One identity mismatch: Piyush Sharma's CRM deal uses <code>piyush10@gmail.com</code> while Shopify order AW7918 uses <code>piyush10@hotmail.com</code> — same person, two emails.</p>
-
-<h2>4 · Klaviyo Flow Performance</h2>
-<div class="legend">Timeframe: last 7 days. Of the 10 monitored pipeline flows, <strong>3 had activity</strong>; 7 had none (see flags in §7). 0 Placed-Order conversions attributed — expected for application/outreach flows.</div>
-
-<h3>Inflection — U5pRV5 · Website Form Flow</h3>
-<table>
-  <tr><th>Message</th><th class="num">Recip.</th><th class="num">Deliv.</th><th class="num">Open</th><th class="num">Click</th><th class="num">Bounce</th></tr>
-  <tr><td>Non-Customer Form</td><td class="num">25</td><td class="num">24</td><td class="num">66.7%</td><td class="num">41.7%</td><td class="num">1</td></tr>
-  <tr><td>Existing Customer Form</td><td class="num">3</td><td class="num">3</td><td class="num">100%</td><td class="num">66.7%</td><td class="num">0</td></tr>
-  <tr><td>Non-Cust. Full App — 1st Reminder</td><td class="num">8</td><td class="num">7</td><td class="num">71.4%</td><td class="num">14.3%</td><td class="num">1</td></tr>
-  <tr><td>Non-Cust. Full App — 2nd Reminder</td><td class="num">1</td><td class="num">1</td><td class="num">100%</td><td class="num">100%</td><td class="num">0</td></tr>
-  <tr><td><strong>Flow total</strong></td><td class="num"><strong>37</strong></td><td class="num"><strong>35</strong></td><td class="num"><strong>71.4%</strong></td><td class="num"><strong>40.0%</strong></td><td class="num"><strong>2</strong></td></tr>
-</table>
-<p class="small muted">No activity: S7e2kz, VbKyBF (interview invites) · Xc8ygf, UEH9YJ, V4K49n (WhatsApp webhooks).</p>
-
-<div class="two">
-  <div>
-    <h3>Ancestra — RzfMh3 · Sales Sequence</h3>
-    <table>
-      <tr><th>Message</th><th class="num">Recip.</th><th class="num">Open</th><th class="num">Click</th></tr>
-      <tr><td>Email 1</td><td class="num">9</td><td class="num">77.8%</td><td class="num">22.2%</td></tr>
-      <tr><td>1st Follow-Up</td><td class="num">12</td><td class="num">66.7%</td><td class="num">33.3%</td></tr>
-      <tr><td>2nd Follow-Up</td><td class="num">21</td><td class="num">66.7%</td><td class="num">0%</td></tr>
-      <tr><td><strong>Total</strong></td><td class="num"><strong>42</strong></td><td class="num"><strong>69.0%</strong></td><td class="num"><strong>14.3%</strong></td></tr>
-    </table>
-    <p class="small muted">0 bounces. No activity: SdR5FE (WhatsApp).</p>
-  </div>
-  <div>
-    <h3>Perception — UctY5K · Sales Sequence</h3>
-    <table>
-      <tr><th>Message</th><th class="num">Recip.</th><th class="num">Open</th><th class="num">Click</th></tr>
-      <tr><td>Email 1</td><td class="num">32</td><td class="num">59.4%</td><td class="num">9.4%</td></tr>
-      <tr><td>1st Follow-Up</td><td class="num">26</td><td class="num">84.6%</td><td class="num">23.1%</td></tr>
-      <tr><td>2nd Follow-Up</td><td class="num">16</td><td class="num">56.3%</td><td class="num">6.3%</td></tr>
-      <tr><td><strong>Total</strong></td><td class="num"><strong>74</strong></td><td class="num"><strong>67.6%</strong></td><td class="num"><strong>13.5%</strong></td></tr>
-    </table>
-    <p class="small muted">0 bounces. No activity: VXJ7mX (WhatsApp).</p>
+<h3>3D · Unmatched Monday Won deals — CRM wins with no Shopify order</h3>
+<div class="card">
+  <div class="status-banner" style="border-color:rgba(47,191,113,.4);background:rgba(47,191,113,.08)">
+    <span class="dot green"></span>
+    <div><strong>None.</strong> All 7 deals marked Won this week have a matching Shopify transaction:
+    <div class="small muted" style="margin-top:3px">Bernard Ho (AW7928) · Lionel Tan (AW7937) · Ahmed Sultan Abdul Raqeeb (AW7942) · Siddharth Singh (AW7934) · Lim Chuang (AW7932) · David Marquez (AW7929) · Jaimin Desai (AW7931)</div></div>
   </div>
 </div>
 
-<h2>5 · Klaviyo Funnel (cumulative snapshot)</h2>
+<!-- KLAVIYO FLOWS -->
+<h2>4 · Klaviyo Flow Performance (last 7 days)</h2>
+<div class="small muted" style="margin-bottom:10px">3 of the 10 monitored pipeline flows had activity this week. Open/click rates are email-delivery based; conversions use the <code>Placed Order</code> metric.</div>
+
+<div class="card">
+  <h3 style="margin-top:4px">Perception Xuan Sales <span class="pill grey">UctY5K</span></h3>
+  <div class="small muted">95 recipients · 94 delivered · 63.8% open · 4.26% click · 1 bounce · 2 conversions (HKD 56,000)</div>
+  <table>
+    <tr><th>Message</th><th class="num">Recip.</th><th class="num">Delivered</th><th class="num">Open</th><th class="num">Click</th><th class="num">Conv.</th></tr>
+    <tr><td>Email 1</td><td class="num">60</td><td class="num">59</td><td class="num">64.4%</td><td class="num">5.09%</td><td class="num">1</td></tr>
+    <tr><td>1st Follow-Up</td><td class="num">22</td><td class="num">22</td><td class="num">59.1%</td><td class="num">0%</td><td class="num">0</td></tr>
+    <tr><td>2nd Follow-Up</td><td class="num">13</td><td class="num">13</td><td class="num">69.2%</td><td class="num">7.69%</td><td class="num">1</td></tr>
+  </table>
+</div>
+
+<div class="two" style="margin-top:16px">
+  <div class="card">
+    <h3 style="margin-top:4px">Ancestra Jiao Sales <span class="pill grey">RzfMh3</span></h3>
+    <div class="small muted">40 recipients · 55.0% open · 15.0% click · 0 conversions</div>
+    <table>
+      <tr><th>Message</th><th class="num">Recip.</th><th class="num">Open</th><th class="num">Click</th></tr>
+      <tr><td>Email 1</td><td class="num">30</td><td class="num">56.7%</td><td class="num">13.3%</td></tr>
+      <tr><td>1st Follow-Up</td><td class="num">2</td><td class="num">50.0%</td><td class="num">0%</td></tr>
+      <tr><td>2nd Follow-Up</td><td class="num">8</td><td class="num">50.0%</td><td class="num">25.0%</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:4px">Inflection Website Form Flow <span class="pill grey">U5pRV5</span></h3>
+    <div class="small muted">27 recipients · 33.3% open · 11.1% click · 0 conversions</div>
+    <table>
+      <tr><th>Message</th><th class="num">Recip.</th><th class="num">Open</th><th class="num">Click</th></tr>
+      <tr><td>Non Customer Form</td><td class="num">6</td><td class="num">66.7%</td><td class="num">50.0%</td></tr>
+      <tr><td>Non-Cust. Full App – 1st Reminder</td><td class="num">4</td><td class="num">25.0%</td><td class="num">0%</td></tr>
+      <tr><td>Non-Cust. Full App – 2nd Reminder</td><td class="num">15</td><td class="num">26.7%</td><td class="num">0%</td></tr>
+      <tr><td>Full App – 2nd Reminder</td><td class="num">2</td><td class="num">0%</td><td class="num">0%</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="flag amber small" style="margin-top:14px">
+  <strong>Zero activity this week (7 flows):</strong> Inflection Interview Invitation – Existing Customers (<code>S7e2kz</code>), Inflection Interview Invitation – Non-Customers (<code>VbKyBF</code>), Inflection Customer App Final Reminder / Zaapi WA (<code>Xc8ygf</code>), Inflection Non-Customer App Final Reminder / Zaapi WA (<code>UEH9YJ</code>), Inflection Interview Final WA Follow-Up / Zaapi (<code>V4K49n</code>), Ancestra Final WA Reminder / Zaapi (<code>SdR5FE</code>), Perception Final WA Follow-Up / Zaapi (<code>VXJ7mX</code>). Expected for the quieter pipelines, but worth confirming the Zaapi webhook flows are still live for Inflection.
+</div>
+
+<!-- FUNNEL -->
+<h2>5 · Klaviyo Funnel Metrics</h2>
 <div class="grid g3">
   <div class="card">
     <h3 style="margin-top:4px">Inflection</h3>
-    <table>
-      <tr><td>PDP sign-ups <span class="muted">(RMRQMZ)</span></td><td class="num">447</td></tr>
-      <tr><td>Tally submissions <span class="muted">(SAqZKr+XHSnBs)</span></td><td class="num">217</td></tr>
-      <tr><td>Interview/Lost <span class="muted">(WEeqZx)</span></td><td class="num">82</td></tr>
-    </table>
-    <div class="small muted">Sign-up → Tally conversion</div>
-    <div class="barwrap"><div class="bar" style="width:48.5%"></div></div>
-    <div class="small" style="margin-top:4px"><strong>48.5%</strong></div>
+    <div class="small">454 PDP sign-ups → 221 Tally submissions → 91 Interview/Lost</div>
+    <div class="bar"><span style="width:48.7%;background:var(--accent)"></span></div>
+    <div class="legend">Sign-up → Tally submission: <strong>48.7%</strong> (81 customers + 140 non-customers). 44 Won to date.</div>
   </div>
   <div class="card">
-    <h3 style="margin-top:4px">Ancestra</h3>
-    <table>
-      <tr><td>Waitlist subscribers <span class="muted">(WiF6dq)</span></td><td class="num">852</td></tr>
-      <tr><td>Deals in Monday pipeline</td><td class="num">206</td></tr>
-    </table>
-    <div class="small muted">Waitlist → pipeline</div>
-    <div class="barwrap"><div class="bar" style="width:24.2%"></div></div>
-    <div class="small" style="margin-top:4px"><strong>24.2%</strong></div>
+    <h3 style="margin-top:4px">Ancestra Jiao</h3>
+    <div class="small">870 waitlist subscribers → 221 in Monday pipeline</div>
+    <div class="bar"><span style="width:25.4%;background:var(--blue)"></span></div>
+    <div class="legend">Waitlist → pipeline: <strong>25.4%</strong>. 18 Won to date.</div>
   </div>
   <div class="card">
-    <h3 style="margin-top:4px">Perception</h3>
-    <table>
-      <tr><td>OOS list subscribers <span class="muted">(RCnwB5)</span></td><td class="num">693</td></tr>
-      <tr><td>Deals in Monday pipeline</td><td class="num">355</td></tr>
-    </table>
-    <div class="small muted">OOS list → pipeline</div>
-    <div class="barwrap"><div class="bar" style="width:51.2%"></div></div>
-    <div class="small" style="margin-top:4px"><strong>51.2%</strong></div>
+    <h3 style="margin-top:4px">Perception Xuan</h3>
+    <div class="small">693 OOS "Notify Me" subscribers → 388 in Monday pipeline</div>
+    <div class="bar"><span style="width:56.0%;background:var(--accent2)"></span></div>
+    <div class="legend">OOS list → pipeline: <strong>56.0%</strong>. 22 Won to date.</div>
   </div>
 </div>
 
+<!-- CROSS-CHECK -->
 <h2>6 · Klaviyo → Monday.com Cross-Check</h2>
-<div class="panel">
-<p style="margin:12px 0 6px"><span class="ok">No missing leads.</span> Every form submission this week reconciles to a Monday.com deal. Form-submission counts match new-deal counts almost exactly:</p>
-<table>
-  <tr><th>Pipeline</th><th>Form</th><th class="num">Unique submitters</th><th class="num">New Monday deals</th><th>Result</th></tr>
-  <tr><td>Inflection</td><td>Y2RNTx</td><td class="num">28</td><td class="num">29</td><td><span class="ok">All matched</span></td></tr>
-  <tr><td>Ancestra Jiao</td><td>YiRQvL</td><td class="num">32</td><td class="num">31</td><td><span class="ok">All matched</span></td></tr>
-  <tr><td>Perception Xuan</td><td>WNZhnp</td><td class="num">62</td><td class="num">62</td><td><span class="ok">All matched</span></td></tr>
-</table>
-<p class="note">4 submitters initially flagged (augustopedrini04@gmail.com · derrickchen0622@gmail.com · joe.eccleston16@gmail.com · g1pittstop@gmail.com) were verified to <strong>already exist</strong> in the correct boards as earlier deals — they re-submitted the form this week. The Zapier dedup correctly avoided creating duplicates. <strong>No manual additions were made.</strong></p>
+<div class="card">
+  <p class="small" style="margin-top:4px">80 form submissions captured this week (Inflection 7 · Ancestra 15 · Perception 34). Each unique submitter was matched by email against the relevant board. <strong>2 leads had submitted a form but were missing from Monday</strong> — both added during this audit at stage "Submitted Interest" with an audit-trail note.</p>
+  <table>
+    <tr><th>Pipeline</th><th>Submitters</th><th>Missing</th><th>Action</th></tr>
+    <tr><td>Inflection (Y2RNTx)</td><td class="num">7</td><td>—</td><td><span class="pill green">All matched</span></td></tr>
+    <tr><td>Ancestra (YiRQvL)</td><td class="num">15</td><td>Allen Hu &lt;All3nhu@gmail.com&gt; (submitted 19 Jun)</td><td><span class="pill amber">Added manually</span></td></tr>
+    <tr><td>Perception (WNZhnp)</td><td class="num">34</td><td>Siddharth Vadlamani &lt;sid.s.vadlamani@gmail.com&gt; (submitted 22 Jun)</td><td><span class="pill amber">Added manually</span></td></tr>
+  </table>
+  <div class="legend">Likely cause: a missed Klaviyo→Monday Zap run (Ancestra 354006078 / Perception 354014041). Worth confirming in Zapier task history.</div>
 </div>
 
+<!-- ACTION ITEMS -->
 <h2>7 · Action Items</h2>
-<div class="panel">
-<ul class="items">
-  <li><span class="ico">🔴</span><div><strong>Untracked sales — patrick@barlascollection.com.</strong> 3 watches purchased this week (Ancestra, Perception Xuán, Perception v3; ~HK$116k) with no deal in any Monday board. Create the CRM records and mark Won.</div></li>
-  <li><span class="ico">⚠️</span><div><strong>Identity mismatch — Piyush Sharma.</strong> CRM deal on <code>piyush10@gmail.com</code>; Shopify order AW7918 on <code>piyush10@hotmail.com</code>. Merge to a single profile so future reconciliations match.</div></li>
-  <li><span class="ico">⚠️</span><div><strong>Inflection WhatsApp + interview flows silent.</strong> 5 of 6 Inflection flows (S7e2kz, VbKyBF, Xc8ygf, UEH9YJ, V4K49n) sent nothing this week. May be legitimate (no leads reached those stages) but the Zaapi WhatsApp safety-net flows showing zero for an established pipeline warrants a trigger check.</div></li>
-  <li><span class="ico">⚠️</span><div><strong>Ancestra &amp; Perception WhatsApp final-reminders silent.</strong> SdR5FE and VXJ7mX had no activity. Verify the Zaapi webhook triggers are firing for non-responders.</div></li>
-  <li><span class="ico">⚠️</span><div><strong>No-reply backlog.</strong> Perception 106 and Ancestra 61 deals sit in <code>Contacted - No Reply</code> (~30% of each board), while only 3 (Perception) and 4 (Ancestra) progressed to <code>Interested - In Discussion</code>. Major mid-funnel bottleneck.</div></li>
-  <li><span class="ico">⚠️</span><div><strong>Inflection loss rate.</strong> 285 of 442 deals (64%) are <code>Lost Deals</code> vs 44 Won — worth a review of loss reasons / qualification.</div></li>
-  <li><span class="ico">ℹ️</span><div><strong>Zapier task history not directly accessible</strong> via available tools. Health inferred as good (sync counts match, dedup working). Recommend a manual check of all 9 Zaps' task history for silent errors.</div></li>
-</ul>
+
+<div class="flag red">
+  <strong>Reconciliation gap (revenue completeness):</strong> 10 Shopify orders this week — incl. a <strong>HKD 154,114 Inflection</strong> order (AW7945, pending) and 9 Perception orders — are not reflected as "Won Deals" in Monday. Move the closed/paid ones to Won so CRM revenue matches Shopify.
+</div>
+
+<div class="flag">
+  <strong>Perception "Interested - Invoice Sent" stalled since April:</strong> 4 deals invoiced but unpaid for ~2 months — Craig Haines, Pedro Rodrigues, Sohan Taware, Edmo Gutierrez Elizondo. Highest-value follow-ups to chase or close out.
+</div>
+
+<div class="flag">
+  <strong>Inflection interview funnel clogged:</strong> 31 deals stuck in "Invited To Interview" >2 weeks (some since Nov 2025 — Andrew Christanto, Joshua Cornman-Homonoff, William Mcgee). Plus 9 "Allocation(s) Offered" and 6 "Interview Scheduled" stale. Re-engage or mark lost to clean the pipeline.
+</div>
+
+<div class="flag">
+  <strong>Ancestra "Contacted - No Reply" backlog:</strong> 37 of 74 CNR deals have had no movement in &gt;2 weeks. The waitlist→pipeline conversion is only 25.4% — biggest leakage point across the three pipelines.
+</div>
+
+<div class="flag blue">
+  <strong>Klaviyo→Monday sync misses:</strong> 2 form submitters (Allen Hu, Siddharth Vadlamani) never created deals — added manually this run. Check Zapier task history for Zaps 354006078 and 354014041 for errors/halts.
+</div>
+
+<div class="flag blue">
+  <strong>Tooling:</strong> Connect the Shopify MCP so future reconciliations run against the source of truth directly (line-level, paid-vs-pending). This run used Klaviyo's Shopify mirror as a proxy. Zapier task-history could not be pulled programmatically (manager connector only) — verify the 9 Zaps manually.
 </div>
 
 <footer>
-  Atelier Wen sales-automation audit · Platforms: Klaviyo · Monday.com · Shopify · Zapier · Tally · Zaapi.<br>
-  Generated automatically 2026-06-15 11:58 UTC. Revenue in HKD (gross sales). Reconciliation status: <span class="pill red">● Red</span>.
+  Automated weekly Atelier Wen sales automation audit · Sources: Monday.com (CRM boards 5021567647 / 5027142339 / 5027142326), Klaviyo (flows, forms, lists, Shopify Placed Order mirror). Shopify connector unavailable this run. Generated by Claude, 24 June 2026. Figures in HKD.
 </footer>
 
 </div>
