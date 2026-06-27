@@ -160,39 +160,43 @@
 
   <!-- ============ SHOPIFY RECONCILIATION ============ -->
   <h2>3 · Shopify ↔ Monday.com Weekly Reconciliation</h2>
-  <div class="status-banner sb-amber">
-    <span class="dot amber"></span>
-    <div><strong>Reconciliation status: AMBER — could not be completed this run.</strong><br>
-    <span class="small muted">The Shopify connector (source of truth for completed transactions) is not connected to this audit environment, so Shopify orders for the period could not be retrieved. Revenue completeness/occurrence reconciliation could not run. This is itself a control gap — see Action Items.</span></div>
+  <div class="status-banner" style="background:rgba(210,83,63,.1);border:1px solid rgba(210,83,63,.5);">
+    <span class="dot" style="background:var(--red);"></span>
+    <div><strong>Reconciliation status: RED — 7 of 9 orders (78%) untracked in CRM.</strong><br>
+    <span class="small muted">Shopify MCP is not connected, so reconciliation used the <strong>Klaviyo Shopify mirror</strong> (Shopify "Placed Order" events) as the source of truth — consistent with last week's run. 9 orders containing the three products landed this week (HKD 642,978 subtotal), but only 2 are recorded as "Won Deals" in the matching Monday board. Discrepancy rate 78% &gt; 10% threshold.</span></div>
   </div>
 
-  <h3>Sales Summary — units & revenue per product</h3>
+  <h3>Sales Summary — units & revenue per product <span class="muted small">(Klaviyo Shopify mirror, HKD)</span></h3>
   <table>
-    <tr><th>Product</th><th class="num">Units sold</th><th class="num">Subtotal revenue</th></tr>
-    <tr><td>Inflection</td><td class="num">n/a</td><td class="num">n/a</td></tr>
-    <tr><td>Ancestra Jiao</td><td class="num">n/a</td><td class="num">n/a</td></tr>
-    <tr><td>Perception Xuan</td><td class="num">n/a</td><td class="num">n/a</td></tr>
-    <tr><td><strong>Grand total</strong></td><td class="num"><strong>n/a</strong></td><td class="num"><strong>n/a</strong></td></tr>
+    <tr><th>Product</th><th class="num">Units</th><th class="num">Orders</th><th class="num">Subtotal revenue (HKD)</th></tr>
+    <tr><td>Inflection</td><td class="num">3</td><td class="num">2</td><td class="num">395,276.82</td></tr>
+    <tr><td>Ancestra Jiao</td><td class="num">1</td><td class="num">1</td><td class="num">45,860.06</td></tr>
+    <tr><td>Perception Xuan</td><td class="num">8</td><td class="num">6</td><td class="num">201,841.12</td></tr>
+    <tr><td><strong>Grand total</strong></td><td class="num"><strong>12</strong></td><td class="num"><strong>9</strong></td><td class="num"><strong>642,978.00</strong></td></tr>
   </table>
-  <p class="muted small">Shopify data unavailable — figures cannot be reported this week.</p>
+  <p class="muted small">Subtotals are pre-discount line totals. Order AW7948's charged value (HKD 154,250) is below its line total due to a 40% ETP retailer margin + bundle discount.</p>
 
-  <div class="two">
-    <div>
-      <h3>Unmatched Shopify orders <span class="muted small">(in Shopify, missing from Monday)</span></h3>
-      <table>
-        <tr><th>Order</th><th>Email</th><th>Product</th><th>Amount</th><th>Date</th></tr>
-        <tr><td colspan="5" class="muted">Cannot be determined — Shopify not connected.</td></tr>
-      </table>
-    </div>
-    <div>
-      <h3>Unmatched Monday won deals <span class="muted small">(won in CRM, missing from Shopify)</span></h3>
-      <table>
-        <tr><th>Deal</th><th>Email</th><th>Board</th><th>Won date</th></tr>
-        <tr><td colspan="4" class="muted">Cannot be confirmed without Shopify. Current "Won Deals" totals: Inflection 44, Ancestra 19, Perception 22 (cumulative).</td></tr>
-      </table>
-    </div>
-  </div>
-  <p class="muted small">Monday boards expose only the deal's creation date, not stage-change dates, so the set of deals that <em>moved to Won this week</em> cannot be isolated from this data either; none of the current Won deals were <em>created</em> in the period.</p>
+  <h3>Unmatched Shopify orders <span class="muted small">(completed sale, not "Won" in Monday) — 7</span></h3>
+  <table>
+    <tr><th>Order</th><th>Customer email</th><th>Product</th><th class="num">Amount (HKD)</th><th>Date</th><th>CRM status</th></tr>
+    <tr><td>AW7948</td><td>ethan@exquisitetimepieces.com</td><td>Inflection</td><td class="num">154,250.03</td><td>26 Jun</td><td>Not on Inflection board</td></tr>
+    <tr><td>AW7945</td><td>budi.jaya26@gmail.com</td><td>Inflection</td><td class="num">154,114.10</td><td>24 Jun</td><td>On board, stuck in "Closing - Invoice Sent"</td></tr>
+    <tr><td>AW7946</td><td>rdlinton@vertizon.net</td><td>Perception Xuan</td><td class="num">40,301.17</td><td>25 Jun</td><td>Absent (variant rdlinton@verizon.net is Won on <em>Inflection</em> board — wrong board + typo)</td></tr>
+    <tr><td>AW7944</td><td>milo.simons@gmail.com</td><td>Perception Xuan</td><td class="num">55,539.38</td><td>24 Jun</td><td>On board, "Contacted - No Reply"</td></tr>
+    <tr><td>AW7943</td><td>thar9819@gmail.com</td><td>Perception Xuan</td><td class="num">2,258.18</td><td>24 Jun</td><td>Absent from board</td></tr>
+    <tr><td>AW7941</td><td>justin.dai7238@gmail.com</td><td>Perception Xuan</td><td class="num">40,297.11</td><td>22 Jun</td><td>Absent from board</td></tr>
+    <tr><td>AW7940</td><td>darrennlam@gmail.com</td><td>Perception Xuan</td><td class="num">37,750.00</td><td>22 Jun</td><td>Absent from board</td></tr>
+  </table>
+  <p class="muted small">Correctly recorded as Won (2 of 9): AW7947 tstoler93@gmail.com (Ancestra Jiao), AW7942 raqeeb72@gmail.com (Perception Xuan).</p>
+
+  <h3>Monday won deals vs Shopify</h3>
+  <table>
+    <tr><th>Board</th><th class="num">Current Won Deals</th><th class="num">Matching this week's orders</th></tr>
+    <tr><td>Inflection</td><td class="num">44</td><td class="num">0</td></tr>
+    <tr><td>Ancestra Jiao</td><td class="num">19</td><td class="num">1</td></tr>
+    <tr><td>Perception Xuan</td><td class="num">22</td><td class="num">1</td></tr>
+  </table>
+  <p class="muted small">Limitation: Monday boards expose only the deal's creation date, not stage-change dates, so deals that <em>moved to Won this week</em> cannot be isolated — the Monday→Shopify direction is reported against cumulative Won totals.</p>
 
   <!-- ============ KLAVIYO FLOWS ============ -->
   <h2>4 · Klaviyo Flow Performance <span class="muted small">(last 7 days, per message)</span></h2>
@@ -260,8 +264,11 @@
   <!-- ============ ACTION ITEMS ============ -->
   <h2>7 · Action Items</h2>
   <ul class="act">
-    <li class="crit"><strong>Shopify reconciliation could not run.</strong> The Shopify connector is not connected to this audit environment, disabling the weekly revenue completeness/occurrence control. Connect Shopify so order-to-deal matching can resume.</li>
+    <li class="crit"><strong>7 of 9 Shopify orders this week are not marked Won in the CRM (HKD ~490k untracked).</strong> Move them to "Won Deals": AW7948 (ethan@exquisitetimepieces.com), AW7945 (budi.jaya26@gmail.com), AW7946 (rdlinton@vertizon.net), AW7944 (milo.simons@gmail.com), AW7943 (thar9819@gmail.com), AW7941 (justin.dai7238@gmail.com), AW7940 (darrennlam@gmail.com). Five of these are Perception Xuan orders.</li>
+    <li class="crit"><strong>budi.jaya26@gmail.com paid (Inflection, AW7945, HKD 154,114) but the deal is still "Closing - Invoice Sent" since 4 Nov 2025.</strong> The long-stuck invoice has now been paid — move the deal to Won.</li>
+    <li><strong>Data-quality: order AW7946 email mismatch.</strong> Shopify shows <code>rdlinton@vertizon.net</code> (Perception) while a near-identical <code>rdlinton@verizon.net</code> is Won on the <em>Inflection</em> board — likely the same person on the wrong board with a typo. Verify and correct.</li>
     <li class="crit"><strong>Perception Xuan conversion is very low.</strong> 343 of 394 deals (87%) are "Contacted - No Reply" (149) or "Lost Deals" (194); only 22 Won. The funnel is leaking heavily after first contact — review messaging/offer.</li>
+    <li><strong>Reconnect the Shopify MCP.</strong> This run reconciled via the Klaviyo Shopify mirror (as last week). Direct Shopify access would restore exact order-level reconciliation and stage-change timing.</li>
     <li><strong>Inflection: 120 non-terminal deals, several stuck since November 2025.</strong> Oldest: budi jaya (Closing - Invoice Sent, 2025-11-04), Joshua Cornman-Homonoff (Interview Completed - Allocation(s) Pending, 2025-11-04), Andrew Christanto (Invited To Interview, 2025-11-05), William Mcgee (Interview Scheduled, 2025-11-07), Piyachat Bovornroongruang (Invited To Interview, 2025-11-20). A single deal has been in "Closing - Invoice Sent" since November — chase or close it.</li>
     <li><strong>Perception Xuan: 4 deals in "Interested - Invoice Sent" since late March</strong> (Sohan Taware, Edmo Gutierrez Elizondo, Pedro Rodrigues, Craig Haines — all 26–31 March 2026). Invoices sent ~3 months ago without closing = revenue at risk.</li>
     <li><strong>Ancestra Jiao: 90 non-terminal deals,</strong> oldest "Submitted Interest" since 19 March (Maor Bracha) and "In Discussion" since mid-April (Yael Soran, Francesco Vanin, Mark Day). Triage stale interest.</li>
@@ -271,7 +278,7 @@
   </ul>
 
   <div class="foot">
-    Generated automatically · 27 June 2026 · Sources: Monday.com CRM (boards 5021567647 / 5027142339 / 5027142326), Klaviyo (flow reports, lists, form-submission events), Zapier Manager. Shopify source-of-truth data was unavailable this run.
+    Generated automatically · 27 June 2026 · Sources: Monday.com CRM (boards 5021567647 / 5027142339 / 5027142326), Klaviyo (flow reports, lists, form-submission &amp; Placed Order events — used as the Shopify mirror), Zapier Manager. Shopify MCP was not connected; reconciliation used the Klaviyo Shopify mirror. Revenue in HKD.
   </div>
 </div>
 </body>
